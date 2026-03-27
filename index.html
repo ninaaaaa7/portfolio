@@ -71,16 +71,20 @@
   .nav-links a:hover { color: var(--accent); }
 
   .lang-toggle {
-    display: flex; border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
-    font-size: .78rem; font-weight: 600; cursor: pointer; user-select: none;
+    display: flex; border: 2px solid var(--accent); border-radius: 10px; overflow: hidden;
+    font-size: .85rem; font-weight: 700; cursor: pointer; user-select: none;
+    box-shadow: 0 2px 8px rgba(200,85,61,.15);
+    transition: box-shadow .3s;
   }
+  .lang-toggle:hover { box-shadow: 0 3px 12px rgba(200,85,61,.25); }
   .lang-toggle span {
-    padding: 5px 14px; transition: all .25s; letter-spacing: .03em;
+    padding: 7px 18px; transition: all .25s; letter-spacing: .04em;
   }
   .lang-toggle span.active {
-    background: var(--text); color: var(--bg);
+    background: var(--accent); color: #fff;
   }
-  .lang-toggle span:not(.active):hover { background: var(--tag-bg); }
+  .lang-toggle span:not(.active) { color: var(--accent); }
+  .lang-toggle span:not(.active):hover { background: rgba(200,85,61,.08); }
 
   /* ===== HERO ===== */
   .hero {
@@ -308,7 +312,7 @@
     .hero-stats { justify-content: center; }
   }
   @media (max-width: 768px) {
-    .container { padding: 0 20px; }
+    .container { padding: 0 28px; }
     .edu-grid { grid-template-columns: 1fr; }
     .exp-item { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
     .hero { padding: 48px 0 36px; }
@@ -339,7 +343,7 @@
       </ul>
       <div class="lang-toggle" id="langToggle">
         <span class="active" data-lang="en">EN</span>
-        <span data-lang="zh">中</span>
+        <span data-lang="zh">中文</span>
       </div>
       <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -400,19 +404,19 @@
     </h2>
     <div class="edu-grid stagger">
       <div class="edu-card fade-up">
-        <div class="edu-year">2025 — 2026</div>
+        <div class="edu-year" data-en="Aug 2025 — May 2026" data-zh="2025年8月 - 2026年5月">Aug 2025 — May 2026</div>
         <div class="edu-school" data-en="Johns Hopkins University" data-zh="约翰霍普金斯大学">Johns Hopkins University</div>
         <div class="edu-degree" data-en="MS Information Systems &amp; Artificial Intelligence" data-zh="信息系统与商业人工智能 硕士">MS Information Systems &amp; Artificial Intelligence</div>
         <div class="edu-highlight" data-en="AI · Cloud Computing · Big Data" data-zh="AI · 云计算 · 大数据">AI · Cloud Computing · Big Data</div>
       </div>
       <div class="edu-card fade-up">
-        <div class="edu-year">2024 — 2025</div>
+        <div class="edu-year" data-en="Aug 2024 — Jul 2025" data-zh="2024年8月 - 2025年7月">Aug 2024 — Jul 2025</div>
         <div class="edu-school" data-en="Johns Hopkins University" data-zh="约翰霍普金斯大学">Johns Hopkins University</div>
         <div class="edu-degree" data-en="MS Business Analytics &amp; Risk Management" data-zh="商业分析与风险管理 硕士">MS Business Analytics &amp; Risk Management</div>
         <div class="edu-highlight" data-en="GPA 3.74 · Top 10% Honors" data-zh="GPA 3.74 · 前10%荣誉毕业">GPA 3.74 · Top 10% Honors</div>
       </div>
       <div class="edu-card fade-up">
-        <div class="edu-year">2020 — 2024</div>
+        <div class="edu-year" data-en="Sep 2020 — Jun 2024" data-zh="2020年9月 - 2024年6月">Sep 2020 — Jun 2024</div>
         <div class="edu-school" data-en="Zhejiang Sci-Tech University" data-zh="浙江理工大学">Zhejiang Sci-Tech University</div>
         <div class="edu-degree" data-en="BS Finance" data-zh="金融学 本科">BS Finance</div>
         <div class="edu-highlight" data-en="GPA 3.9 · Rank 1/72" data-zh="GPA 3.9 · 专业排名 1/72">GPA 3.9 · Rank 1/72</div>
@@ -442,7 +446,7 @@
 
       <div class="exp-item fade-up">
         <div class="exp-meta">
-          <div class="exp-date">Feb — Jun 2025</div>
+          <div class="exp-date" data-en="Feb — Jun 2025" data-zh="2025年2月 - 2025年6月">Feb — Jun 2025</div>
           <div class="exp-location" data-en="Washington DC, USA" data-zh="美国 华盛顿">Washington DC, USA</div>
         </div>
         <div class="exp-body">
@@ -470,7 +474,7 @@
 
       <div class="exp-item fade-up">
         <div class="exp-meta">
-          <div class="exp-date">Nov 2023 — Mar 2024</div>
+          <div class="exp-date" data-en="Nov 2023 — Mar 2024" data-zh="2023年11月 - 2024年3月">Nov 2023 — Mar 2024</div>
           <div class="exp-location" data-en="Hangzhou, China" data-zh="浙江 杭州">Hangzhou, China</div>
         </div>
         <div class="exp-body">
@@ -497,7 +501,7 @@
 
       <div class="exp-item fade-up">
         <div class="exp-meta">
-          <div class="exp-date">Aug — Nov 2023</div>
+          <div class="exp-date" data-en="Aug — Nov 2023" data-zh="2023年8月 - 2023年11月">Aug — Nov 2023</div>
           <div class="exp-location" data-en="Hangzhou, China" data-zh="浙江 杭州">Hangzhou, China</div>
         </div>
         <div class="exp-body">
@@ -524,7 +528,7 @@
 
       <div class="exp-item fade-up">
         <div class="exp-meta">
-          <div class="exp-date">May — Aug 2023</div>
+          <div class="exp-date" data-en="May — Aug 2023" data-zh="2023年5月 - 2023年8月">May — Aug 2023</div>
           <div class="exp-location" data-en="Hangzhou &amp; Shanghai" data-zh="杭州、上海">Hangzhou &amp; Shanghai</div>
         </div>
         <div class="exp-body">
@@ -539,7 +543,7 @@
 
       <div class="exp-item fade-up">
         <div class="exp-meta">
-          <div class="exp-date">Jun — Sep 2022</div>
+          <div class="exp-date" data-en="Jun — Sep 2022" data-zh="2022年6月 - 2022年9月">Jun — Sep 2022</div>
           <div class="exp-location" data-en="Hangzhou, China" data-zh="浙江 杭州">Hangzhou, China</div>
         </div>
         <div class="exp-body">
