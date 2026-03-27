@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yijing Wang | Personal Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:        #F6F1EB;
+    --bg-card:   #FFFBF5;
+    --text:      #2C2C2C;
+    --text-secondary: #6B6560;
+    --accent:    #C8553D;
+    --accent-light: #E8D5C4;
+    --border:    #E0D6CC;
+    --tag-bg:    #EDE7DF;
+    --shadow:    0 1px 3px rgba(60,50,40,.06);
+    --radius:    12px;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  ::selection { background: var(--accent-light); color: var(--text); }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(246,241,235,.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-name {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 1.15rem; font-weight: 600; letter-spacing: .02em;
+  }
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    font-size: .82rem; font-weight: 500; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--text-secondary);
+    transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .lang-toggle {
+    display: flex; border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
+    font-size: .78rem; font-weight: 600; cursor: pointer; user-select: none;
+  }
+  .lang-toggle span {
+    padding: 5px 14px; transition: all .25s; letter-spacing: .03em;
+  }
+  .lang-toggle span.active {
+    background: var(--text); color: var(--bg);
+  }
+  .lang-toggle span:not(.active):hover { background: var(--tag-bg); }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .container { display: flex; align-items: center; gap: 48px; }
+  .hero-inner { flex: 1; min-width: 0; }
+  .hero-photo {
+    flex-shrink: 0; width: 320px; position: relative;
+  }
+  .hero-photo img {
+    width: 100%; height: auto; display: block;
+    border-radius: 20px;
+    mix-blend-mode: multiply;
+    filter: contrast(1.02) saturate(1.05);
+  }
+  .hero-photo::before {
+    content: ''; position: absolute; inset: -6px;
+    border: 2px solid var(--accent-light); border-radius: 24px;
+    opacity: .5;
+  }
+  .hero-photo::after {
+    content: ''; position: absolute; inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(180deg, transparent 60%, var(--bg) 100%);
+    pointer-events: none;
+  }
+  .hero-greeting {
+    font-size: .9rem; font-weight: 500; color: var(--accent);
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    font-weight: 700; line-height: 1.15; margin-bottom: 24px;
+    letter-spacing: -.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary);
+    max-width: 560px; margin-bottom: 32px;
+  }
+  .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .stat-item { text-align: left; }
+  .stat-number {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 2rem; font-weight: 700; color: var(--accent);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: .72rem; color: var(--text-secondary); margin-top: 4px;
+    letter-spacing: .04em; text-transform: uppercase; font-weight: 500;
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  .section-label {
+    font-size: .78rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700; margin-bottom: 48px; line-height: 1.2;
+  }
+
+  /* ===== EDUCATION ===== */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .edu-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px 28px;
+    box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s;
+    position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--accent); opacity: 0;
+    transition: opacity .3s;
+  }
+  .edu-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(60,50,40,.08); }
+  .edu-card:hover::before { opacity: 1; }
+  .edu-year {
+    font-size: .75rem; font-weight: 600; color: var(--accent);
+    letter-spacing: .06em; margin-bottom: 10px;
+  }
+  .edu-school {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 1.15rem; font-weight: 600; margin-bottom: 4px; line-height: 1.35;
+  }
+  .edu-degree { font-size: .88rem; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.5; }
+  .edu-highlight {
+    display: inline-block; font-size: .78rem; font-weight: 600;
+    background: var(--tag-bg); padding: 4px 12px; border-radius: 6px;
+    color: var(--text);
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 220px 1fr; gap: 40px;
+    padding: 40px 0; border-bottom: 1px solid var(--border);
+    transition: background .3s;
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-item:hover { background: rgba(255,251,245,.6); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 8px; }
+  .exp-date {
+    font-size: .8rem; font-weight: 600; color: var(--accent);
+    letter-spacing: .04em; margin-bottom: 6px;
+  }
+  .exp-location { font-size: .78rem; color: var(--text-secondary); }
+  .exp-company {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 1.3rem; font-weight: 600; margin-bottom: 4px; line-height: 1.3;
+  }
+  .exp-role {
+    font-size: .9rem; color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;
+  }
+  .exp-details { list-style: none; }
+  .exp-details li {
+    position: relative; padding-left: 18px; margin-bottom: 10px;
+    font-size: .92rem; line-height: 1.7; color: #444;
+  }
+  .exp-details li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-light); border: 1.5px solid var(--accent);
+  }
+  .metric {
+    font-weight: 700; color: var(--accent);
+    background: linear-gradient(to top, rgba(200,85,61,.1) 40%, transparent 40%);
+    padding: 0 2px;
+  }
+
+  /* ===== EXP METRIC BARS ===== */
+  .exp-metric-visual {
+    display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .metric-bar {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px; font-size: .78rem;
+  }
+  .metric-bar-fill {
+    width: 48px; height: 6px; background: var(--tag-bg);
+    border-radius: 3px; overflow: hidden; position: relative;
+  }
+  .metric-bar-fill span {
+    display: block; height: 100%; border-radius: 3px;
+    background: var(--accent); transition: width .8s ease;
+  }
+  .metric-bar-label { color: var(--text-secondary); font-weight: 500; white-space: nowrap; }
+  .metric-bar-value { font-weight: 700; color: var(--accent); }
+
+  /* ===== SKILLS ===== */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .skill-group {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    box-shadow: var(--shadow);
+  }
+  .skill-group-title {
+    font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-size: .82rem; font-weight: 500; padding: 6px 16px;
+    background: var(--tag-bg); border-radius: 20px;
+    transition: all .25s; cursor: default;
+  }
+  .skill-tag:hover { background: var(--accent); color: #fff; }
+
+  /* ===== AWARDS ===== */
+  .awards-row {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;
+  }
+  .award-badge {
+    font-size: .78rem; font-weight: 500; padding: 6px 16px;
+    border: 1.5px solid var(--border); border-radius: 20px;
+    color: var(--text-secondary); white-space: nowrap;
+    transition: all .3s;
+  }
+  .award-badge:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 60px 0 48px; text-align: center;
+  }
+  .footer-links {
+    display: flex; justify-content: center; gap: 32px;
+    margin-bottom: 24px; flex-wrap: wrap;
+  }
+  .footer-link {
+    font-size: .88rem; font-weight: 500; color: var(--text-secondary);
+    transition: color .25s; display: flex; align-items: center; gap: 6px;
+  }
+  .footer-link:hover { color: var(--accent); }
+  .footer-link svg { width: 16px; height: 16px; }
+  .footer-copy { font-size: .75rem; color: var(--text-secondary); opacity: .6; }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .stagger > .fade-up:nth-child(1) { transition-delay: .05s; }
+  .stagger > .fade-up:nth-child(2) { transition-delay: .12s; }
+  .stagger > .fade-up:nth-child(3) { transition-delay: .19s; }
+  .stagger > .fade-up:nth-child(4) { transition-delay: .26s; }
+  .stagger > .fade-up:nth-child(5) { transition-delay: .33s; }
+
+  /* ===== RESPONSIVE ===== */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
+  @media (max-width: 900px) {
+    .hero .container { flex-direction: column-reverse; text-align: center; }
+    .hero-photo { width: 220px; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .hero-stats { justify-content: center; }
+  }
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+    .hero { padding: 48px 0 36px; }
+    .hero-stats { gap: 24px; }
+    .hero-photo { width: 180px; }
+    .nav-links { display: none; }
+    section { padding: 48px 0; }
+    .hero h1 { font-size: 2rem; }
+    .hamburger { display: block; }
+    .exp-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-name">
+      <span data-en="Yijing Wang" data-zh="汪怡婧">Yijing Wang</span>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#education" data-en="Education" data-zh="教育">Education</a></li>
+        <li><a href="#experience" data-en="Experience" data-zh="经历">Experience</a></li>
+        <li><a href="#skills" data-en="Skills" data-zh="技能">Skills</a></li>
+        <li><a href="#contact" data-en="Contact" data-zh="联系">Contact</a></li>
+      </ul>
+      <div class="lang-toggle" id="langToggle">
+        <span class="active" data-lang="en">EN</span>
+        <span data-lang="zh">中</span>
+      </div>
+      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-greeting fade-up">
+        <span data-en="Hello, I'm" data-zh="你好，我是">Hello, I'm</span>
+      </p>
+      <h1 class="fade-up">
+        <span data-en="Yijing Wang" data-zh="汪怡婧">Yijing Wang</span><br>
+        <em data-en="Data &amp; Business Analytics" data-zh="数据分析 &amp; 商业智能">Data &amp; Business Analytics</em>
+      </h1>
+      <p class="hero-desc fade-up">
+        <span data-en="Dual-master's graduate from Johns Hopkins University, bridging finance domain expertise with AI and data science to deliver actionable business insights." data-zh="约翰霍普金斯大学双硕士，融合金融专业知识与AI和数据科学技术，致力于提供可落地的商业洞察与数据驱动决策方案。">Dual-master's graduate from Johns Hopkins University, bridging finance domain expertise with AI and data science to deliver actionable business insights.</span>
+      </p>
+      <div class="hero-stats fade-up">
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label" data-en="Internships" data-zh="段实习经历">Internships</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3.74</div>
+          <div class="stat-label" data-en="Master's GPA · Top 10%" data-zh="硕士 GPA · 前10%">Master's GPA · Top 10%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3.9</div>
+          <div class="stat-label" data-en="Undergrad GPA /4" data-zh="本科 GPA /4">Undergrad GPA /4</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Top 1</div>
+          <div class="stat-label" data-en="Finance Rank 1/72" data-zh="金融专业排名 1/72">Finance Rank 1/72</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2</div>
+          <div class="stat-label" data-en="Master's Degrees" data-zh="个硕士学位">Master's Degrees</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo fade-up">
+      <img src="photo.jpg" alt="Yijing Wang" />
+    </div>
+  </div>
+</header>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-label fade-up" data-en="Education" data-zh="教育经历">Education</p>
+    <h2 class="section-title fade-up">
+      <span data-en="Academic Foundation" data-zh="学术背景">Academic Foundation</span>
+    </h2>
+    <div class="edu-grid stagger">
+      <div class="edu-card fade-up">
+        <div class="edu-year">2025 — 2026</div>
+        <div class="edu-school" data-en="Johns Hopkins University" data-zh="约翰霍普金斯大学">Johns Hopkins University</div>
+        <div class="edu-degree" data-en="MS Information Systems &amp; Artificial Intelligence" data-zh="信息系统与商业人工智能 硕士">MS Information Systems &amp; Artificial Intelligence</div>
+        <div class="edu-highlight" data-en="AI · Cloud Computing · Big Data" data-zh="AI · 云计算 · 大数据">AI · Cloud Computing · Big Data</div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-year">2024 — 2025</div>
+        <div class="edu-school" data-en="Johns Hopkins University" data-zh="约翰霍普金斯大学">Johns Hopkins University</div>
+        <div class="edu-degree" data-en="MS Business Analytics &amp; Risk Management" data-zh="商业分析与风险管理 硕士">MS Business Analytics &amp; Risk Management</div>
+        <div class="edu-highlight" data-en="GPA 3.74 · Top 10% Honors" data-zh="GPA 3.74 · 前10%荣誉毕业">GPA 3.74 · Top 10% Honors</div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-year">2020 — 2024</div>
+        <div class="edu-school" data-en="Zhejiang Sci-Tech University" data-zh="浙江理工大学">Zhejiang Sci-Tech University</div>
+        <div class="edu-degree" data-en="BS Finance" data-zh="金融学 本科">BS Finance</div>
+        <div class="edu-highlight" data-en="GPA 3.9 · Rank 1/72" data-zh="GPA 3.9 · 专业排名 1/72">GPA 3.9 · Rank 1/72</div>
+      </div>
+    </div>
+    <div class="awards-row fade-up">
+      <span class="award-badge" data-en="Provincial Outstanding Graduate" data-zh="浙江省优秀毕业生">Provincial Outstanding Graduate</span>
+      <span class="award-badge" data-en="National English Competition — Grand Prize" data-zh="全国大学生英语竞赛特等奖">National English Competition — Grand Prize</span>
+      <span class="award-badge" data-en="Provincial Government Scholarship" data-zh="浙江省政府奖学金 (2021-2023)">Provincial Government Scholarship</span>
+      <span class="award-badge" data-en="First Prize Scholarship" data-zh="校一等奖学金">First Prize Scholarship</span>
+      <span class="award-badge" data-en="IELTS 7.5" data-zh="雅思 7.5 分">IELTS 7.5</span>
+      <span class="award-badge">GRE 328</span>
+      <span class="award-badge" data-en="CET-6: 612" data-zh="六级 612 分">CET-6: 612</span>
+      <span class="award-badge" data-en="Outstanding Student Leader" data-zh="优秀学生干部">Outstanding Student Leader</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label fade-up" data-en="Experience" data-zh="实习与项目经历">Experience</p>
+    <h2 class="section-title fade-up">
+      <span data-en="Where I've Contributed" data-zh="我的实践经历">Where I've Contributed</span>
+    </h2>
+    <div class="exp-list stagger">
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Feb — Jun 2025</div>
+          <div class="exp-location" data-en="Washington DC, USA" data-zh="美国 华盛顿">Washington DC, USA</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-company" data-en="JHU Community Consulting Lab" data-zh="约翰霍普金斯大学社区咨询实验室">JHU Community Consulting Lab</div>
+          <div class="exp-role" data-en="Student Consultant" data-zh="咨询顾问">Student Consultant</div>
+          <ul class="exp-details">
+            <li><span data-en='Developed an AI-powered voice app for Trident Builders, automating daily work reports and reducing manual entry time by <span class="metric">~60%</span>' data-zh='为建筑公司开发基于 AI 的语音应用，将工作汇报录入时间缩短约 <span class="metric">60%</span>'>Developed an AI-powered voice app for Trident Builders, automating daily work reports and reducing manual entry time by <span class="metric">~60%</span></span></li>
+            <li><span data-en='Built SARIMA model for Fender, improving monthly guitar demand forecast accuracy by <span class="metric">20%+</span>' data-zh='与吉他公司合作，调整预测模型，提升月度需求预测准确率超 <span class="metric">20%</span>'>Built SARIMA model for Fender, improving monthly guitar demand forecast accuracy by <span class="metric">20%+</span></span></li>
+            <li><span data-en='Selected as <span class="metric">Best Consultant Team</span> out of 12+ teams' data-zh='在 <span class="metric">12+ 支团队</span>中获评最佳咨询团队'>Selected as <span class="metric">Best Consultant Team</span> out of 12+ teams</span></li>
+          </ul>
+          <div class="exp-metric-visual">
+            <div class="metric-bar">
+              <div class="metric-bar-fill"><span style="width:60%"></span></div>
+              <span class="metric-bar-label" data-en="Time Saved" data-zh="时间节省">Time Saved</span>
+              <span class="metric-bar-value">60%</span>
+            </div>
+            <div class="metric-bar">
+              <div class="metric-bar-fill"><span style="width:40%"></span></div>
+              <span class="metric-bar-label" data-en="Forecast Accuracy" data-zh="预测准确率">Forecast Accuracy</span>
+              <span class="metric-bar-value">+20%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Nov 2023 — Mar 2024</div>
+          <div class="exp-location" data-en="Hangzhou, China" data-zh="浙江 杭州">Hangzhou, China</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-company" data-en="Greentown China Holdings Ltd" data-zh="绿城房地产集团有限公司">Greentown China Holdings Ltd</div>
+          <div class="exp-role" data-en="Research Institute Intern" data-zh="行业研究实习生">Research Institute Intern</div>
+          <ul class="exp-details">
+            <li><span data-en='Analyzed <span class="metric">10+ Chinese &amp; Japanese</span> real-estate companies over <span class="metric">20 years</span>, producing <span class="metric">2 reports (200+ pages)</span>' data-zh='深度分析 <span class="metric">10余家</span>中日房企 <span class="metric">20年</span>财务表现，形成 <span class="metric">2份200余页</span>行业研究报告'>Analyzed <span class="metric">10+ Chinese &amp; Japanese</span> real-estate companies over <span class="metric">20 years</span>, producing <span class="metric">2 reports (200+ pages)</span></span></li>
+            <li><span data-en="Compiled and visualized 3 months of macroeconomic data; developed strategies aligned with company objectives" data-zh="整理近3个月宏观经济数据并可视化，分析当前总体经济与房地产行业形势">Compiled and visualized 3 months of macroeconomic data; developed strategies aligned with company objectives</span></li>
+          </ul>
+          <div class="exp-metric-visual">
+            <div class="metric-bar">
+              <div class="metric-bar-fill"><span style="width:80%"></span></div>
+              <span class="metric-bar-label" data-en="Companies Analyzed" data-zh="研究企业">Companies Analyzed</span>
+              <span class="metric-bar-value">10+</span>
+            </div>
+            <div class="metric-bar">
+              <div class="metric-bar-fill"><span style="width:90%"></span></div>
+              <span class="metric-bar-label" data-en="Report Pages" data-zh="报告页数">Report Pages</span>
+              <span class="metric-bar-value">200+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Aug — Nov 2023</div>
+          <div class="exp-location" data-en="Hangzhou, China" data-zh="浙江 杭州">Hangzhou, China</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-company" data-en="Caitong Securities Co., Ltd" data-zh="财通证券">Caitong Securities Co., Ltd</div>
+          <div class="exp-role" data-en="Risk Management Intern" data-zh="风控部实习生">Risk Management Intern</div>
+          <ul class="exp-details">
+            <li><span data-en='Processed <span class="metric">40+ account</span> cancellations and linked accounts through compliance reviews' data-zh='协助完成账户合规审查，处理 <span class="metric">40余个</span>违规账户销户及关联账户'>Processed <span class="metric">40+ account</span> cancellations and linked accounts through compliance reviews</span></li>
+            <li><span data-en='Reported and analyzed <span class="metric">100+ abnormal</span> customer information entries; monitored daily trading dynamics' data-zh='监测营业部每日交易动态，分析整理 <span class="metric">100余条</span>异常客户信息'>Reported and analyzed <span class="metric">100+ abnormal</span> customer information entries; monitored daily trading dynamics</span></li>
+          </ul>
+          <div class="exp-metric-visual">
+            <div class="metric-bar">
+              <div class="metric-bar-fill"><span style="width:40%"></span></div>
+              <span class="metric-bar-label" data-en="Accounts Processed" data-zh="处理账户">Accounts Processed</span>
+              <span class="metric-bar-value">40+</span>
+            </div>
+            <div class="metric-bar">
+              <div class="metric-bar-fill"><span style="width:85%"></span></div>
+              <span class="metric-bar-label" data-en="Entries Analyzed" data-zh="分析条目">Entries Analyzed</span>
+              <span class="metric-bar-value">100+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">May — Aug 2023</div>
+          <div class="exp-location" data-en="Hangzhou &amp; Shanghai" data-zh="杭州、上海">Hangzhou &amp; Shanghai</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-company" data-en="Tianjian Enterprise Consulting" data-zh="天健企业咨询有限公司">Tianjian Enterprise Consulting</div>
+          <div class="exp-role" data-en="Transaction Advisory Assistant" data-zh="交易咨询部实习生">Transaction Advisory Assistant</div>
+          <ul class="exp-details">
+            <li><span data-en='Cooperated in <span class="metric">3 financial due diligence</span> initiatives, including valuation and pre-investment advisory' data-zh='参与 <span class="metric">3个</span>财务尽职调查项目，涵盖财务分析、估值及投前咨询'>Cooperated in <span class="metric">3 financial due diligence</span> initiatives, including valuation and pre-investment advisory</span></li>
+            <li><span data-en='Performed <span class="metric">2 investment analyses</span> on China&apos;s sustainable energy market' data-zh='完成 <span class="metric">2份</span>中国可持续能源市场投资分析'>Performed <span class="metric">2 investment analyses</span> on China's sustainable energy market</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Jun — Sep 2022</div>
+          <div class="exp-location" data-en="Hangzhou, China" data-zh="浙江 杭州">Hangzhou, China</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-company" data-en="Wuchan Zhongda Chemical Group" data-zh="物产中大化工集团有限公司">Wuchan Zhongda Chemical Group</div>
+          <div class="exp-role" data-en="Global Business Intern" data-zh="国际业务部实习生">Global Business Intern</div>
+          <ul class="exp-details">
+            <li><span data-en='Interpreted and managed <span class="metric">30+ foreign contracts</span> and logistics documentation' data-zh='拟定并跟踪 <span class="metric">30余份</span>商品进口及内贸合同'>Interpreted and managed <span class="metric">30+ foreign contracts</span> and logistics documentation</span></li>
+            <li><span data-en="Used Python &amp; R to collect forex and agricultural futures data; drafted weekly market reports" data-zh="运用 Python 和 R 整理外汇及农产品期货数据，撰写每周市场报告">Used Python &amp; R to collect forex and agricultural futures data; drafted weekly market reports</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label fade-up" data-en="Skills &amp; Tools" data-zh="技能与工具">Skills &amp; Tools</p>
+    <h2 class="section-title fade-up">
+      <span data-en="What I Work With" data-zh="我的专业技能">What I Work With</span>
+    </h2>
+    <div class="skills-grid stagger">
+      <div class="skill-group fade-up">
+        <div class="skill-group-title" data-en="Programming &amp; Data" data-zh="编程与数据">Programming &amp; Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Stata</span>
+          <span class="skill-tag">EViews</span>
+        </div>
+      </div>
+      <div class="skill-group fade-up">
+        <div class="skill-group-title" data-en="Analytics &amp; AI" data-zh="分析与 AI">Analytics &amp; AI</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-en="Machine Learning" data-zh="机器学习">Machine Learning</span>
+          <span class="skill-tag" data-en="Generative AI" data-zh="生成式 AI">Generative AI</span>
+          <span class="skill-tag" data-en="Data Visualization" data-zh="数据可视化">Data Visualization</span>
+          <span class="skill-tag" data-en="Time Series" data-zh="时间序列">Time Series</span>
+        </div>
+      </div>
+      <div class="skill-group fade-up">
+        <div class="skill-group-title" data-en="Business &amp; Finance" data-zh="商业与金融">Business &amp; Finance</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-en="Financial Analysis" data-zh="财务分析">Financial Analysis</span>
+          <span class="skill-tag" data-en="Risk Management" data-zh="风险管理">Risk Management</span>
+          <span class="skill-tag" data-en="Due Diligence" data-zh="尽职调查">Due Diligence</span>
+          <span class="skill-tag" data-en="Consulting" data-zh="咨询">Consulting</span>
+        </div>
+      </div>
+      <div class="skill-group fade-up">
+        <div class="skill-group-title" data-en="Languages" data-zh="语言能力">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-en="Chinese — Native" data-zh="中文 — 母语">Chinese — Native</span>
+          <span class="skill-tag" data-en="English — Professional (IELTS 7.5)" data-zh="英语 — 专业流利 (雅思 7.5)">English — Professional (IELTS 7.5)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <p class="section-label fade-up" data-en="Get In Touch" data-zh="联系我">Get In Touch</p>
+    <h2 class="section-title fade-up" style="margin-bottom: 32px;">
+      <span data-en="Let's Connect" data-zh="期待与你联系">Let's Connect</span>
+    </h2>
+    <div class="footer-links fade-up">
+      <a class="footer-link" href="mailto:ninawang723723@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        ninawang723723@gmail.com
+      </a>
+      <a class="footer-link" href="tel:+8618758075159">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +(86) 18758075159
+      </a>
+      <a class="footer-link" href="tel:+17034088812">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (+1) 7034088812
+      </a>
+      <a class="footer-link" href="https://linkedin.com/in/yijing-wang-jhu" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Yijing Wang</p>
+  </div>
+</footer>
+
+<script>
+  // Language Toggle
+  const toggle = document.getElementById('langToggle');
+  const spans  = toggle.querySelectorAll('span');
+  let currentLang = 'en';
+
+  toggle.addEventListener('click', (e) => {
+    const target = e.target.closest('span[data-lang]');
+    if (!target || target.dataset.lang === currentLang) return;
+    currentLang = target.dataset.lang;
+    spans.forEach(s => s.classList.toggle('active', s.dataset.lang === currentLang));
+    applyLang();
+  });
+
+  function applyLang() {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + currentLang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+  }
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
