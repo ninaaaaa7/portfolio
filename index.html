@@ -86,6 +86,55 @@
   .lang-toggle span:not(.active) { color: var(--accent); }
   .lang-toggle span:not(.active):hover { background: rgba(200,85,61,.08); }
 
+  /* ===== HERO BUTTONS ===== */
+  .hero-actions {
+    display: flex; gap: 14px; margin-bottom: 36px; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 10px;
+    font-size: .88rem; font-weight: 600; letter-spacing: .02em;
+    transition: all .3s; cursor: pointer; border: none;
+    text-decoration: none;
+  }
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 4px 14px rgba(200,85,61,.25);
+  }
+  .btn-primary:hover {
+    background: #b34a34; transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(200,85,61,.35);
+  }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent); color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(200,85,61,.1);
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    position: fixed; bottom: 32px; right: 32px; z-index: 99;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff; border: none;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(200,85,61,.3);
+    opacity: 0; transform: translateY(16px);
+    transition: all .3s; pointer-events: none;
+  }
+  .back-to-top.show {
+    opacity: 1; transform: translateY(0); pointer-events: auto;
+  }
+  .back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(200,85,61,.4);
+  }
+  .back-to-top svg { width: 20px; height: 20px; }
+
   /* ===== HERO ===== */
   .hero {
     padding: 80px 0 60px;
@@ -310,6 +359,7 @@
     .hero-photo { width: 220px; }
     .hero-desc { margin-left: auto; margin-right: auto; }
     .hero-stats { justify-content: center; }
+    .hero-actions { justify-content: center; }
   }
   @media (max-width: 768px) {
     .container { padding: 0 28px; }
@@ -366,6 +416,16 @@
       <p class="hero-desc fade-up">
         <span data-en="Dual-master's graduate from Johns Hopkins University, bridging finance domain expertise with AI and data science to deliver actionable business insights." data-zh="约翰霍普金斯大学双硕士，融合金融专业知识与AI和数据科学技术，致力于提供可落地的商业洞察与数据驱动决策方案。">Dual-master's graduate from Johns Hopkins University, bridging finance domain expertise with AI and data science to deliver actionable business insights.</span>
       </p>
+      <div class="hero-actions fade-up">
+        <a class="btn btn-primary" href="resume-en.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-en="Resume (EN)" data-zh="英文简历下载">Resume (EN)</span>
+        </a>
+        <a class="btn btn-outline" href="resume-zh.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-en="Resume (CN)" data-zh="中文简历下载">Resume (CN)</span>
+        </a>
+      </div>
       <div class="hero-stats fade-up">
         <div class="stat-item">
           <div class="stat-number">5+</div>
@@ -676,7 +736,36 @@
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Back to Top
+  const topBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    topBtn.classList.toggle('show', window.scrollY > 400);
+  });
+  topBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section, header.hero');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) {
+        current = sec.getAttribute('id') || '';
+      }
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#' + current
+        ? 'var(--accent)' : '';
+    });
+  });
 </script>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 </body>
 </html>
